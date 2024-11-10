@@ -1,0 +1,5 @@
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: org.example.springmybatis
+  configuration:
+    map-underscore-to-camel-case: true

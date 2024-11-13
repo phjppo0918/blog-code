@@ -111,3 +111,4 @@ SELECT
     n,
     CONCAT('User_team', LPAD(n, 7, '0'))
 FROM cte;
+

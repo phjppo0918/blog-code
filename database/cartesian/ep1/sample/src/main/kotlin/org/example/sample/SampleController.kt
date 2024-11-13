@@ -17,5 +17,14 @@ class SampleController(
     @GetMapping("/separate-query")
     fun separateQuery(): Collection<MemberResponse> = sampleService.getSeparateQuery()
 
+    @GetMapping("/cartesian-left/top10")
+    fun cartesianLeftTop10() : Collection<MemberResponse> = sampleService.getCartesianLeftTop10()
+
+    @GetMapping("/cartesian-inner/top10")
+    fun cartesianInnerTop10() : Collection<MemberResponse> = sampleService.getCartesianInnerTop10()
+
+    @GetMapping("/separate-query/top10")
+    fun separateQueryTop10(): Collection<MemberResponse> = sampleService.getSeparateQueryTop10()
+
 
 }

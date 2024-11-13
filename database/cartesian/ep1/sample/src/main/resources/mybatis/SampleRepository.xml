@@ -50,4 +50,58 @@
             team_name as 'name'
         from member_team
     </select>
+
+    <select id="selectTotalLeftJoinTop10" resultType="org.example.sample.data.MemberTotalData">
+        select
+            m.id as 'id',
+                m.member_name as 'name',
+                r.id as 'memberRoleId',
+                r.role_name as 'memberRoleName',
+                t.id as 'memberTeamId',
+                t.team_name as 'memberTeamName'
+        from member m
+                 left join member_role r on r.member_id = m.id
+                 left join member_team t on t.member_id = m.id
+        where 10 > m.id
+    </select>
+
+    <select id="selectTotalInnerJoinTop10" resultType="org.example.sample.data.MemberTotalData">
+        select
+            m.id as 'id',
+                m.member_name as 'name',
+                r.id as 'memberRoleId',
+                r.role_name as 'memberRoleName',
+                t.id as 'memberTeamId',
+                t.team_name as 'memberTeamName'
+        from member m
+                 join member_role r on r.member_id = m.id
+                 join member_team t on t.member_id = m.id
+        where 10 >= m.id
+    </select>
+
+    <select id="selectMemberTop10" resultType="org.example.sample.data.MemberData">
+        select
+            id as 'id',
+                member_name as 'name'
+        from member
+        where 10 >= id
+    </select>
+
+    <select id="selectRoleTop10Member" resultType="org.example.sample.data.RoleData">
+        select
+            id as 'id',
+                member_id as 'memberId',
+                role_name as 'name'
+        from member_role
+        where 10 >= member_id
+    </select>
+
+    <select id="selectTeamTop10Member" resultType="org.example.sample.data.TeamData">
+        select
+            id as 'id',
+                member_id as 'memberId',
+                team_name as 'name'
+        from member_team
+        where 10 >= member_id
+    </select>
 </mapper>

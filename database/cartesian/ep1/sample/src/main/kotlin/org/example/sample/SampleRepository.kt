@@ -14,4 +14,10 @@ interface SampleRepository {
     fun selectRole(): Collection<RoleData>
     fun selectTeam(): Collection<TeamData>
     fun selectTotalInnerJoin(): Collection<MemberTotalData>
+
+    fun selectTotalLeftJoinTop10(): Collection<MemberTotalData>
+    fun selectMemberTop10(): Collection<MemberData>
+    fun selectRoleTop10Member(): Collection<RoleData>
+    fun selectTeamTop10Member(): Collection<TeamData>
+    fun selectTotalInnerJoinTop10(): Collection<MemberTotalData>
 }

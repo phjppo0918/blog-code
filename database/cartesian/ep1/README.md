@@ -19,7 +19,7 @@
 샘플 데이터는 member 10만 건, role 30만 건, team 30만 건을 기반으로 진행하였습니다.  
 
 테스트에서 사용된 코드는 다음 링크를 참고해주시면 감사하겠습니다  
-
+https://github.com/phjppo0918/blog-code/tree/main/database/cartesian/ep1
 
 # 카테시안 곱이란?
 본격적으로 들어가기 앞서, 카테시안 곱에 대해 간단히 설명 드리고자 합니다.  

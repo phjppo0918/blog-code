@@ -90,6 +90,20 @@ vuser를 더 늘리고 싶었는데... 여기서 더 늘리면 실패 확률이 
 ngrinder를 통한 성능 지표를 봐도 쿼리 분리하는 케이스가 월등히 높은 것을 알 수 있었습니다!  
 카테시안 곱을 허용하는 것에 비해 약 3배 정도 성능이 좋은 것을 알 수 있었습니다.
 
+# 한 방 쿼리 실행 계획
+카테시안 곱을 허용한 한 방 쿼리에 대해 실행 계획을 한번 살펴보겠습니다. inner join 한 예시를 기반으로 살펴볼게요!
+```
+-> Inner hash join (r.member_id = t.member_id)  (cost=30937 rows=29929) (actual time=261..1652 rows=900000 loops=1)
+    -> Table scan on r  (cost=4000 rows=299292) (actual time=0.0161..65.2 rows=300000 loops=1)
+    -> Hash
+        -> Nested loop inner join  (cost=0.7 rows=1) (actual time=0.0615..226 rows=300000 loops=1)
+            -> Table scan on t  (cost=0.35 rows=1) (actual time=0.0478..73.1 rows=300000 loops=1)
+            -> Single-row index lookup on m using PRIMARY (id=t.member_id)  (cost=0.35 rows=1) (actual time=380e-6..401e-6 rows=1 loops=300000)
+```
+테이블 r과 t를 member_id 를 기준으로 join을 진행하는 데 실행 시간을 많이 소비한 것을 볼 수 있습니다.  
+hash join을 했음에도 불구하고, 행 수가 많아서 실행시간이 오래 걸리는 것이라 볼 수 있습니다.  
+
+
 # 이보시오! 데이터가 너무 많은거 아니오?
 90만 개의 데이터가 크로스 된 경우인데, 실제로는 이렇게 많은 데이터를 한 번에 부르는 경우는 많이 없을 것입니다!  
 따라서 데이터를 조금 줄여보도록 하겠습니다. 단순히 member가 10명인 경우만 가정해볼까요??

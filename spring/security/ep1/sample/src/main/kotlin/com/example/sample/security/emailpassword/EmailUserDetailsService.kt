@@ -10,7 +10,7 @@ class EmailUserDetailsService(
     private val memberRepository: MemberRepository,
 ) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails {
-        println("member detail service")
-        TODO()
+        println("userDetailsService 실행")
+        return MemberDetails.from(memberRepository.finById(username.toLong())!!)
     }
 }

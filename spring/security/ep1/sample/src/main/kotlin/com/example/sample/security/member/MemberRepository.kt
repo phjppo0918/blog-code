@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class MemberRepository {
-    val storage = mutableListOf<Member>()
+    val storage = mutableListOf<Member>(Member(1, "1", "1"))
 
     fun add(member: Member) {
         storage.add(member)

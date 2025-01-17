@@ -14,6 +14,11 @@
 - DB Slice test가 힘들다
 
 # 외래키에 대한 성능 문제?
+- 주로 DML시에 fk에 관한 컬럼 존재 여부를 확인하기 때문에 성능 저하가 있을 수 있다.
+- 허나 이러한 문제가 치명적이라기에는 저하되는 값이 미미하다.
+- 성능 향상을 위해 FK를 해제하는 것은 최후의 수단으로 보류해야하지 않나 싶다.
+- 그래프 출처 https://martin-son.github.io/Martin-IT-Blog/mysql/foreign%20key/performance/2022/02/28/foreign-key-Performance.html
+
 
 # 개인적인 해결 방법
 - 데이터가 깨지면 안되는 부분만 FK를 설정한다. 무결성에 대한 요구사항을 분석해서 설정 범위를 조절하면 좋을 것 같다 .

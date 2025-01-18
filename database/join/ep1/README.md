@@ -1,0 +1,1 @@
+# 가능하면 outer join 보다 inner join을 사용하자

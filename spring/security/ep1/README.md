@@ -5,13 +5,35 @@
 허나 상당수의 코드가 filter에만 모든 기능을 몰아서 구현한 것을 볼 수 있다.  
 근래 Spring security in action 책을 읽었는데, 위같은 방식이 매우 잘못됨을 인지했고, Security 내 클래스별로 각각 어떤 역할을 하는지 한번 알아보도록 하자
 
-# Dokbaro
+# 들어가기 앞서
+이 포스팅은 DOKBARO를 개발하면서 경험한 것을 기반으로 제작하였습니다.
+### DOKBARO란 ?
+자기계발과 성장을 위해 독서와 스터디를 활용하는 **개발자들을 위한 퀴즈 학습 플랫폼, DOKBARO**입니다.
 
+개발 서적을 즐겨 읽지만, **매번 내용을 제대로 이해했는지 확인하기 어렵지 않으셨나요?** 혹은 이해 부족으로 인해 **독서 스터디가 소수만 적극적으로 참여하는 형태로 변질되는 경험**을 하셨을지도 모릅니다.
+
+그래서, **DOKBARO는**
+
+📚 **퀴즈 출제 및 풀이 기능**으로 도서 내용을 재미있고 효과적으로 이해하도록 도와드려요.
+
+💡 **스터디 리포트 기능**으로 스터디원들이 책에 대해 자유롭게 의견을 나누고, 서로의 학습 현황을 확인할 수 있어요.
+
+**DOKBARO와 함께라면** 도서 이해도를 높이고, 스터디 활동을 보다 풍성하고 활발하게 만들어 이상적인 독서 환경을 경험하실 수 있습니다. ✌️
+
+현재는 알파테스트 중에 있으니, 조금만 더 보완해서 여러분들께 선사하도록 하겠습니다!
 
 # Spring Security 구조
-![img_1.png](img_1.png)
+![img_1.png](img_1.png)  
+이 처럼 spring security는 다양한 컴포넌트들로 구성되어있습니다. 이 중 몇개만 어떤 역할을 하는지 한번 알아볼까요?
+- authenticationFilter: 클라이언트 요청으로부터 인증 정보를 추출하고 인증 프로세스를 시작하는 역할을 합니다.
+- authenticationManager: 인증을 처리하는 핵심 인터페이스로, 인증 요청을 받아 인증 여부를 결정합니다.
+- authenticationProvider: 실제 인증 논리를 구현하는 컴포넌트입니다. 사용자 인증을 위한 핵심 비즈니스 로직이 들어갑니다.
+- userDetailsService: 사용자의 정보를 로드하는 서비스입니다. 주로 데이터베이스에서 사용자 정보를 조회합니다.
+
+즉, filter 내에서 userDetailsService를 직접 호출하거나, 인증 로직을 직접 처리하는 케이스는 지양해야겠죠!
 
 # Filter도 종류가 다양해
+spring security는 여러 filter chain을 통해 요청을 처리합니다
 
 # 각종 handler도 설정해줘
 
@@ -22,7 +44,7 @@
 ## 1. filter bean 으로 선언하는 것 지양
 
 ## 2. Authentication 객체에 대한 가변성
-특히 Authentication 구현체 중 하나인 UsernamePasswordAuthenticationToken 를 사용시에는 authorities가 있으면 인증된 것으로 인지하니 사용 시 유의해야 합니다.
+특히 Authentication 구현체 중 하나인 UsernamePasswordAuthenticationToken 를 사용시에는 authorities가 있으면 인증된 것으로 인지하니 사용 시 유의해야 합니다.  
 ![img_2.png](img_2.png)
 
 # 결론
